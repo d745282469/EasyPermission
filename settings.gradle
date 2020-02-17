@@ -1,0 +1,2 @@
+include ':app', ':easypermission2'
+rootProject.name='EasyPermission'
