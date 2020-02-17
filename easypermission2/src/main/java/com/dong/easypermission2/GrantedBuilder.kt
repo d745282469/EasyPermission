@@ -15,6 +15,7 @@ class GrantedBuilder {
     private val allPermissions:List<String>
     private var fragmentX: PermissionFragmentX? = null
     private var fragment: PermissionFragment? = null
+    private val grantedManager:GrantedManager
 
     /**事件监听器*/
     private var beforeGrantedListener:BeforeGrantedListener? = null
@@ -25,16 +26,20 @@ class GrantedBuilder {
         private const val myRequestCode = 666
     }
 
-    constructor(definedPermissions: List<String>,allPermissions:List<String>, fragmentX: PermissionFragmentX) {
+    constructor(definedPermissions: List<String>,allPermissions:List<String>,
+                fragmentX: PermissionFragmentX,grantedManager: GrantedManager) {
         this.fragmentX = fragmentX
         this.definedPermissions = definedPermissions
         this.allPermissions = allPermissions
+        this.grantedManager = grantedManager
     }
 
-    constructor(definedPermissions: List<String>,allPermissions:List<String>, fragment: PermissionFragment) {
+    constructor(definedPermissions: List<String>,allPermissions:List<String>,
+                fragment: PermissionFragment,grantedManager: GrantedManager) {
         this.fragment = fragment
         this.definedPermissions = definedPermissions
         this.allPermissions = allPermissions
+        this.grantedManager = grantedManager
     }
 
     /**
@@ -102,6 +107,7 @@ class GrantedBuilder {
                 throw RuntimeException("SdkVersion needs 24,But current version is " + Build.VERSION.SDK_INT + ". Use other methods or change your minSdkVersion.")
             }
         }
+        grantedManager.clear()
     }
 
     fun beforeGranted(listener: BeforeGrantedListener):GrantedBuilder{

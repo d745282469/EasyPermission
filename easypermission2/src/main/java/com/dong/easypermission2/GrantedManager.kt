@@ -47,11 +47,16 @@ class GrantedManager {
         }
 
         fragmentX?.let {
-            return GrantedBuilder(definedPermissions,permissionList,it)
+            return GrantedBuilder(definedPermissions,permissionList,it,this)
         }
         fragment?.let {
-            return GrantedBuilder(definedPermissions,permissionList,it)
+            return GrantedBuilder(definedPermissions,permissionList,it,this)
         }
         throw RuntimeException("fragmentX or fragment is null")
+    }
+
+    internal fun clear(){
+        fragment = null
+        fragmentX = null
     }
 }
