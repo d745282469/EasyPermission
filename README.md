@@ -2,9 +2,27 @@
 
 ## 简单使用
 
-1. 在AndroidManifest.xml中声明需要使用的权限
+1. 在项目最外层的**build.gradle**中声明
 
-2. 构造一个List，传入需要动态申请的权限
+   ```java
+   allprojects {
+       repositories {
+           google()
+           jcenter()
+           maven { url 'https://www.jitpack.io' }
+       }
+   }
+   ```
+
+2. 在项目Module，一般名为app目录下的**build.gradle**中引入该库
+
+   ```css
+   implementation 'com.github.d745282469:EasyPermission:1.1'
+   ```
+
+3. 在AndroidManifest.xml中声明需要使用的权限
+
+4. 构造一个List，传入需要动态申请的权限
 
    ```kotlin
    val permissions = ArrayList<String>()
@@ -13,7 +31,7 @@
    permissions.add(Manifest.permission.ACCESS_WIFI_STATE)
    ```
 
-3. 调用EasyPermission
+5. 调用EasyPermission
 
    ```kotlin
    EasyPermission
