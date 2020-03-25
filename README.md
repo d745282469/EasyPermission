@@ -17,7 +17,7 @@
 2. 在项目Module，一般名为app目录下的**build.gradle**中引入该库
 
    ```css
-   implementation 'com.github.d745282469:EasyPermission:1.1'
+   implementation 'com.github.d745282469:EasyPermission:1.2'
    ```
 
 3. 在AndroidManifest.xml中声明需要使用的权限
