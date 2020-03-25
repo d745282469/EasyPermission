@@ -127,13 +127,18 @@ class GrantedBuilder {
 
     /**
      * 发起授权
+     * @return true表示全部权限都获取到了
      */
-    fun granted() {
+    fun granted():Boolean {
+        var result = false
         if (definedPermissions.isEmpty()) {
+            result = true
             onGrantedListener?.onGrantedAll(allPermissions)
         } else {
             beforeGrantedListener?.beforeGranted(definedPermissions)
             val array = definedPermissions.toTypedArray()
+
+            // 开始发起授权窗口
             fragmentX?.let {
                 it.grantedBuilder = this
                 it.requestPermissions(array, myRequestCode)
@@ -144,5 +149,16 @@ class GrantedBuilder {
                 it.requestPermissions(array, myRequestCode)
             }
         }
+        return result
+    }
+
+    /**
+     * 判断是否已经获取到了权限
+     *
+     * 注意：这个函数不会回调任何监听器
+     * @return
+     */
+    fun haveGranted():Boolean{
+        return definedPermissions.isEmpty()
     }
 }

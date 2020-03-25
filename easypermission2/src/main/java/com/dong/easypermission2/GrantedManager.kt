@@ -21,6 +21,18 @@ class GrantedManager {
         this.fragmentX = fragmentX
     }
 
+    /**
+     * 申请单独一个权限
+     * @param permission
+     */
+    fun addPermission(permission: String): GrantedBuilder {
+        return permissions(listOf(permission))
+    }
+
+    /**
+     * 申请一堆权限
+     * @param permissionList
+     */
     fun permissions(permissionList: List<String>): GrantedBuilder {
         //找到未授权的权限
         val definedPermissions = ArrayList<String>()
@@ -47,15 +59,15 @@ class GrantedManager {
         }
 
         fragmentX?.let {
-            return GrantedBuilder(definedPermissions,permissionList,it,this)
+            return GrantedBuilder(definedPermissions, permissionList, it, this)
         }
         fragment?.let {
-            return GrantedBuilder(definedPermissions,permissionList,it,this)
+            return GrantedBuilder(definedPermissions, permissionList, it, this)
         }
-        throw RuntimeException("fragmentX or fragment is null")
+        throw RuntimeException("FragmentX or Fragment is null")
     }
 
-    internal fun clear(){
+    internal fun clear() {
         fragment = null
         fragmentX = null
     }
